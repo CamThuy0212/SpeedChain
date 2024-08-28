@@ -1,4 +1,13 @@
-import { View, Text, ImageBackground, StyleSheet, SafeAreaView, Image, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -11,25 +20,31 @@ const HomeScreen = () => {
       <ImageBackground
         resizeMode="cover"
         source={require('../../assets/images/bg-home.png')}
-        style={styles.backgroundImage}
-      >
+        style={styles.backgroundImage}>
         <Header />
         <View style={styles.container1}>
           <View style={styles.container2}>
-            <Image resizeMode='contain'
-              source={require('../../assets/images/card-speeder.png')}
-              style={styles.card}
-            />
-            <Image resizeMode='contain'
-              source={require('../../assets/images/card-prediction.png')}
-              style={styles.card} />
+            <TouchableOpacity style={styles.card}>
+              <Image
+                resizeMode="contain"
+                source={require('../../assets/images/card-speeder.png')}
+                style={styles.card1}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.card}>
+              <Image
+                resizeMode="contain"
+                source={require('../../assets/images/card-prediction.png')}
+                style={styles.card1}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <Footer />
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
 export default HomeScreen;
 
@@ -48,10 +63,14 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    width: "100%",
+    width: '100%',
   },
   card: {
     flex: height > 800 ? 0.4 : 0.43,
-    width: "100%",
+    width: '100%',
+  },
+  card1: {
+    flex: 1,
+    width: '100%',
   },
 });
