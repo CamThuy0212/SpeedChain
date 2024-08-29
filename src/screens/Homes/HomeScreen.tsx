@@ -14,7 +14,7 @@ import Footer from '../../components/Footer';
 
 const { width, height } = Dimensions.get('window');
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -24,7 +24,7 @@ const HomeScreen = () => {
         <Header />
         <View style={styles.container1}>
           <View style={styles.container2}>
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Speeder')}>
               <Image
                 resizeMode="contain"
                 source={require('../../assets/images/card-speeder.png')}
