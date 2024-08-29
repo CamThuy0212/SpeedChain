@@ -72,14 +72,13 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     flex: 0.15,
-    backgroundColor: color.orange,
   },
   backgroundImage: {
-    flex: height > 800 ? 0.95 : 0.9,
+    flex: 1,
     flexDirection: 'row',
-    alignContent: 'center',
     justifyContent: 'space-between',
-    paddingTop: Platform.OS == 'ios' ? 0 : 30
+    paddingTop: Platform.OS == 'ios' ? 0 : 30,
+    paddingBottom: 10
   },
   containInfo: {
     flex: 0.5,
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   infoImage: {
-    flex: 0.9,
+    flex: height > 800 ? 0.9 : 0.85,
     flexDirection: 'row',
     alignContent: 'center',
   },
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   contain2: {
-    flex: Platform.OS == 'ios' ? 0.32 : 0.25,
+    flex: Platform.OS == 'ios' ? 0.3 : 0.25,
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     height: 18,
   },
   contain3: {
-    flex: Platform.OS == 'ios' ? 0.3 : 0.2,
+    flex: Platform.OS == 'ios' ? 0.3 : 0.25,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -133,14 +132,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fontFamilies.regular,
     color: 'white',
-    marginTop: Platform.OS == 'ios' ? 0 : -2,
+    marginTop: Platform.OS == 'ios' ? -1 : -2,
   },
   containScore: {
     flex: 0.5,
     justifyContent: 'center',
   },
   scoreImage: {
-    flex: 0.8,
+    flex: Platform.OS == 'ios' ? 0.8 : 0.7,
   },
   contain4: {
     flex: 1,
