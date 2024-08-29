@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import React from 'react';
+
+const { width, height } = Dimensions.get('window');
 
 const Footer = () => {
   return (
@@ -40,16 +42,18 @@ export default Footer;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
+    flex: 0.05,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
   },
   btHome: {
     flex: 0.15,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    marginBottom: Platform.OS == 'ios' ? height > 800 ? 0 : -50 : -30,
   },
   image: {
-    flex: 0.5,
+    flex: 1,
     width: '100%',
   },
 });

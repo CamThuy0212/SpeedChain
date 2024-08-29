@@ -51,19 +51,19 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'black'
   },
   container1: {
     flex: 0.65,
-    justifyContent: 'flex-end',
   },
   container2: {
     flex: 1,
     marginHorizontal: 10,
-    justifyContent: 'flex-end',
   },
   backgroundImage: {
     flex: 1,
     width: '100%',
+    justifyContent: 'space-between'
   },
   card: {
     flex: height > 800 ? 0.4 : 0.43,

@@ -72,7 +72,6 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     flex: 0.15,
-    height: 'auto',
     backgroundColor: color.orange,
   },
   backgroundImage: {
@@ -80,6 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'center',
     justifyContent: 'space-between',
+    paddingTop: Platform.OS == 'ios' ? 0 : 30
   },
   containInfo: {
     flex: 0.5,
@@ -98,24 +98,23 @@ const styles = StyleSheet.create({
   },
   contain1: {
     flex: 0.7,
-    // alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 5,
   },
   contain2: {
-    flex: 0.32,
+    flex: Platform.OS == 'ios' ? 0.32 : 0.25,
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
   image2: {
     flex: 1,
     height: 18,
-    // marginLeft: 10,
   },
   contain3: {
-    flex: 0.3,
+    flex: Platform.OS == 'ios' ? 0.3 : 0.2,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   textS: {
     fontSize: 40,
@@ -134,6 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fontFamilies.regular,
     color: 'white',
+    marginTop: Platform.OS == 'ios' ? 0 : -2,
   },
   containScore: {
     flex: 0.5,

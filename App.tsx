@@ -7,7 +7,7 @@ import Router from './src/routers/Router';
 const App = () => {
   return (
     <>
-      {/* <StatusBar translucent barStyle={'light-content'} backgroundCsolor='transparent'></StatusBar> */}
+      <StatusBar translucent barStyle={'dark-content'} backgroundColor='transparent'></StatusBar>
       <NavigationContainer>
         <Router />
       </NavigationContainer>
