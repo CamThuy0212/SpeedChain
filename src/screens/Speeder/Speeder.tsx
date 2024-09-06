@@ -26,15 +26,38 @@ const Speeder = () => {
   const translateX = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(1)).current; // Giá trị Animated cho việc thu nhỏ hình ảnh thứ hai
 
-  const popSound = new Sound('pop.mp3', Sound.MAIN_BUNDLE, error => {
-    if (error) {
-      console.error('Error loading sound: ', error);
-    }
-  });
+  const popSoundRef = useRef<Sound | null>(null);
+
+  // Khởi tạo âm thanh "pop" chỉ 1 lần khi component được mount
+  useEffect(() => {
+    const popSound = new Sound('pop.mp3', Sound.MAIN_BUNDLE, error => {
+      if (error) {
+        console.error('Error loading sound: ', error);
+        return;
+      }
+      popSoundRef.current = popSound; // Lưu âm thanh vào biến tham chiếu
+    });
+
+    // Giải phóng tài nguyên âm thanh khi component bị unmount
+    return () => {
+      if (popSoundRef.current) {
+        popSoundRef.current.release();
+      }
+    };
+  }, []);
 
   const handlePress = () => {
+    // Phát âm thanh ngay lập tức khi nhấn
+    if (popSoundRef.current) {
+      popSoundRef.current.setCurrentTime(0); // Đặt lại âm thanh về đầu
+      popSoundRef.current.play((success) => {
+        if (!success) {
+          console.log('Sound playback failed.');
+        }
+      });
+    }
+    // Chỉ thực hiện logic khi `click > 0`
     if (click > 0) {
-      popSound.play();
       setScore(score + 1); // Tăng score
       setClick(click - 1); // Giảm click
       setLastClickTime(Date.now()); // Cập nhật thời gian nhấn
