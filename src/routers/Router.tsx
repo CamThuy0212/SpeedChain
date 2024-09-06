@@ -9,7 +9,7 @@ const Router = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="Speeder" component={Speeder} />
+      <Stack.Screen name="Speeder" component={Speeder} options={{ animation: 'none' }} />
     </Stack.Navigator>
   );
 };

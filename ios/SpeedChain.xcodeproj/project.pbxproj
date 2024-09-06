@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2FFA4C4BAB7340F59C6A5519 /* pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E330E26A7C0A4AB2BDB4795C /* pop.mp3 */; };
 		53283EB7622F4C0B8DDB1132 /* IrishGrover-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA7FB71CCD6A4C84B6D5BE42 /* IrishGrover-Regular.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-SpeedChain-SpeedChainTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-SpeedChain-SpeedChainTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -48,6 +49,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SpeedChain/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-SpeedChain-SpeedChainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeedChain-SpeedChainTests.release.xcconfig"; path = "Target Support Files/Pods-SpeedChain-SpeedChainTests/Pods-SpeedChain-SpeedChainTests.release.xcconfig"; sourceTree = "<group>"; };
 		BA7FB71CCD6A4C84B6D5BE42 /* IrishGrover-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "IrishGrover-Regular.ttf"; path = "../assets/fonts/IrishGrover-Regular.ttf"; sourceTree = "<group>"; };
+		E330E26A7C0A4AB2BDB4795C /* pop.mp3 */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = pop.mp3; path = ../assets/sounds/pop.mp3; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7FB71CCD6A4C84B6D5BE42 /* IrishGrover-Regular.ttf */,
+				E330E26A7C0A4AB2BDB4795C /* pop.mp3 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -198,7 +201,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				9667CB8BDDED65E0ED4CDDC2 /* [CP] Copy Pods Resources */,
+				2CEC2AF770F5DB55B857A25A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,6 +264,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BC450D8EAF0AED8C412FADA9 /* PrivacyInfo.xcprivacy in Resources */,
 				53283EB7622F4C0B8DDB1132 /* IrishGrover-Regular.ttf in Resources */,
+				2FFA4C4BAB7340F59C6A5519 /* pop.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +304,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpeedChain/Pods-SpeedChain-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9667CB8BDDED65E0ED4CDDC2 /* [CP] Copy Pods Resources */ = {
+		2CEC2AF770F5DB55B857A25A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

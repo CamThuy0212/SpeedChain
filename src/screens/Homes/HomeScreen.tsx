@@ -23,22 +23,20 @@ const HomeScreen = ({ navigation }: any) => {
         style={styles.backgroundImage}>
         <Header />
         <View style={styles.container1}>
-          <View style={styles.container2}>
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Speeder')}>
-              <Image
-                resizeMode="contain"
-                source={require('../../assets/images/card-speeder.png')}
-                style={styles.card1}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.card}>
-              <Image
-                resizeMode="contain"
-                source={require('../../assets/images/card-prediction.png')}
-                style={styles.card1}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Speeder')}>
+            <Image
+              resizeMode="contain"
+              source={require('../../assets/images/card-speeder.png')}
+              style={styles.card1}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card}>
+            <Image
+              resizeMode="contain"
+              source={require('../../assets/images/card-prediction.png')}
+              style={styles.card1}
+            />
+          </TouchableOpacity>
         </View>
         <Footer />
       </ImageBackground>
@@ -54,20 +52,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   container1: {
-    flex: 0.65,
-  },
-  container2: {
-    flex: 1,
+    flex: 0.85,
     marginHorizontal: 10,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   backgroundImage: {
     flex: 1,
     width: '100%',
-    justifyContent: 'space-between'
   },
   card: {
-    flex: height > 800 ? 0.4 : 0.43,
+    flex: height > 800 ? 0.33 : 0.33,
     width: '100%',
   },
   card1: {
