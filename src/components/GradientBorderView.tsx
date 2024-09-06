@@ -8,9 +8,10 @@ interface GradientBorderViewProps extends ViewProps {
   borderWidth: number;
   children?: ReactNode;
   color?: string;
+  alignItems?: any;
 }
 
-const GradientBorderView: React.FC<GradientBorderViewProps> = ({ from, to, borderWidth, children, style, color, ...rest }) => {
+const GradientBorderView: React.FC<GradientBorderViewProps> = ({ from, to, borderWidth, children, style, color, alignItems, ...rest }) => {
   return (
     <LinearGradient
       colors={[from ?? '#FFBD33', to ?? '#FF8000']}
@@ -19,7 +20,7 @@ const GradientBorderView: React.FC<GradientBorderViewProps> = ({ from, to, borde
       style={[style, { padding: borderWidth, borderRadius: 10 }]} // Điều chỉnh padding theo độ dày của viền
       {...rest}
     >
-      <View style={[styles.innerView, { borderRadius: 10 - borderWidth, backgroundColor: color ?? 'white', }]}>
+      <View style={[styles.innerView, { borderRadius: 10 - borderWidth, backgroundColor: color ?? 'white', alignItems: alignItems ?? 'flex-end', paddingRight: alignItems ? 0 : 4 }]}>
         {children ?? ""}
       </View>
     </LinearGradient>
@@ -30,8 +31,7 @@ const styles = StyleSheet.create({
   innerView: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    paddingRight: 4
+    overflow: 'hidden',
   },
 });
 

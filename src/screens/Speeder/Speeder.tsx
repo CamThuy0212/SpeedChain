@@ -13,17 +13,20 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Sound from 'react-native-sound';
 import { fontFamilies } from '../../constants/fontFamilies';
+import GradientBorderView from '../../components/GradientBorderView';
 
 const { width, height } = Dimensions.get('window');
 
 const Speeder = () => {
   const [level, setLevel] = useState(0);
   const [score, setScore] = useState(0);
+  const [scoreLimit, setScoreLimit] = useState(1000);
   const [click, setClick] = useState(1000);
   const [clickLimit, setClickLimit] = useState(1000);
   const [lastClickTime, setLastClickTime] = useState(Date.now());
 
   const translateX = useRef(new Animated.Value(0)).current;
+  const progressAnim = useRef(new Animated.Value(0)).current; // Biến để điều khiển thanh tiến trình
   const scaleAnim = useRef(new Animated.Value(1)).current; // Giá trị Animated cho việc thu nhỏ hình ảnh thứ hai
 
   const popSoundRef = useRef<Sound | null>(null);
@@ -77,17 +80,28 @@ const Speeder = () => {
     ]).start();
   };
 
-  // Khi score đạt 1000, tăng level
+  // Cập nhật thanh tiến trình khi score thay đổi
   useEffect(() => {
-    if (score >= 1000) {
+    const progress = score / scoreLimit; // Tính phần trăm tiến trình
+    Animated.timing(progressAnim, {
+      toValue: progress,
+      duration: 500,
+      useNativeDriver: false, // Không cần `useNativeDriver` cho width
+    }).start();
+
+    // Khi score đạt 1000, tăng level
+    if (score >= scoreLimit) {
       const newLevel = level + 1;
       setLevel(newLevel);
       setScore(0); // Đặt lại score
-      const newClickLimit = newLevel === 1 ? 1500 : clickLimit + 500; // Giới hạn click mới
+      const newClickLimit = clickLimit + 500; // Giới hạn click mới
+      const newScoreLimit = scoreLimit + 500;
       setClickLimit(newClickLimit);
+      setScoreLimit(newScoreLimit);
       setClick(newClickLimit); // Đặt lại click với giới hạn mới
     }
   }, [score]);
+
 
   // Tăng click và giảm score mỗi giây nếu không có nhấn
   useEffect(() => {
@@ -110,7 +124,7 @@ const Speeder = () => {
     Animated.loop(
       Animated.sequence([
         Animated.timing(translateX, {
-          toValue: 20, // Di chuyển sang phải 200 đơn vị
+          toValue: 10, // Di chuyển sang phải 200 đơn vị
           duration: 2000, // Thời gian di chuyển là 1 giây
           useNativeDriver: true,
         }),
@@ -122,6 +136,9 @@ const Speeder = () => {
       ]),
     ).start();
   }, []);
+
+  // Tính phần trăm tiến trình
+  const progressPercentage = ((score / scoreLimit) * 100).toFixed(1);
 
   return (
     <View style={styles.container}>
@@ -175,6 +192,18 @@ const Speeder = () => {
                 style={styles.windIg}
               />
             </View>
+            {/* Thanh tiến trình */}
+            <View style={{ width: '100%', alignItems: 'center' }}>
+              <GradientBorderView borderWidth={1} style={styles.progressBar} color='#470E04' alignItems='flex-start'>
+                <Animated.View style={[styles.progressFill, {
+                  width: progressAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['0%', '100%'], // Thanh sẽ rộng dần từ 0% đến 100%
+                  })
+                }]} />
+                <Text style={styles.progressText}>  {progressPercentage}%</Text>
+              </GradientBorderView>
+            </View>
           </View>
         </View>
         <Footer />
@@ -204,6 +233,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginHorizontal: 10,
     justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   woodenBoard: {
     flex: 1,
@@ -245,16 +275,15 @@ const styles = StyleSheet.create({
   },
   pedestal: {
     flex: 1,
-    marginLeft: -10,
     width: '100%',
     height: '100%',
     position: 'absolute',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'flex-end',
   },
   pedestalIg: {
     flex: 0.4,
-    width: '100%',
+    width: '98%',
     height: '100%',
   },
   missile: {
@@ -281,5 +310,25 @@ const styles = StyleSheet.create({
   windIg: {
     flex: 1,
     width: '40%',
+  },
+  progressBar: {
+    width: '80%',
+    height: 20,
+    borderRadius: 10,
+    marginVertical: 20,
+    marginBottom: 100,
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: 'orange',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#470E04'
+  },
+  progressText: {
+    position: 'absolute', // Đặt text ở giữa thanh tiến trình
+    alignSelf: 'center', // Căn giữa text theo chiều ngang
+    color: '#fff', // Màu chữ
+    fontFamily: fontFamilies.regular,
   },
 });
