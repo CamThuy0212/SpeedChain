@@ -279,6 +279,12 @@ const Speeder = () => {
                     outputRange: ['0%', '100%'], // Thanh sẽ rộng dần từ 0% đến 100%
                   })
                 }]} />
+                <Animated.View style={[styles.progressFill2, {
+                  width: progressAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['0%', '100%'], // Thanh sẽ rộng dần từ 0% đến 100%
+                  })
+                }]} />
                 <Text style={styles.progressText}>  {progressPercentage}%</Text>
               </GradientBorderView>
             </View>
@@ -410,11 +416,25 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   progressFill: {
-    height: '100%',
-    backgroundColor: 'orange',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#470E04'
+    height: '50%',
+    backgroundColor: '#FCAB02',
+    borderColor: '#470E04',
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+
+  },
+  progressFill2: {
+    height: '50%',
+    backgroundColor: '#E29000',
+    borderColor: '#470E04',
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10
   },
   progressText: {
     position: 'absolute', // Đặt text ở giữa thanh tiến trình
