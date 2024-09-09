@@ -22,7 +22,7 @@ const Footer = () => {
           style={styles.image}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btHome}>
+      <TouchableOpacity style={styles.btHome} onPress={() => nav.navigate('Leaderboard')}>
         <Image
           resizeMode="contain"
           source={require('../assets/images/bt-rank.png')}
