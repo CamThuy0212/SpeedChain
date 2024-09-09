@@ -24,12 +24,74 @@ const Speeder = () => {
   const [click, setClick] = useState(1000);
   const [clickLimit, setClickLimit] = useState(1000);
   const [lastClickTime, setLastClickTime] = useState(Date.now());
+  const [animations, setAnimations] = useState<any[]>([]); // Lưu danh sách các animation hình ảnh
 
   const translateX = useRef(new Animated.Value(0)).current;
   const progressAnim = useRef(new Animated.Value(0)).current; // Biến để điều khiển thanh tiến trình
   const scaleAnim = useRef(new Animated.Value(1)).current; // Giá trị Animated cho việc thu nhỏ hình ảnh thứ hai
 
   const popSoundRef = useRef<Sound | null>(null);
+
+  const startAnimation = () => {
+    // Các giá trị động: vị trí, scale (kích thước), opacity (độ mờ)
+    const positionAnim = new Animated.ValueXY({ x: 0, y: 0 });
+    const scaleAnimScore = new Animated.Value(0.5);
+    const opacityAnim = new Animated.Value(1);
+
+    const newAnimation = { positionAnim, scaleAnimScore, opacityAnim, id: Math.random().toString() };
+    setAnimations((prevAnimations) => [...prevAnimations, newAnimation]);
+
+    // Đặt lại các giá trị động về ban đầu
+    positionAnim.setValue({ x: 0, y: 0 });
+    scaleAnimScore.setValue(1);
+    opacityAnim.setValue(1);
+
+    // Hiệu ứng động
+    Animated.sequence([
+      // Di chuyển tới 1/3 quãng đường, scale to dần
+      Animated.parallel([
+        Animated.timing(positionAnim, {
+          toValue: { x: 80, y: -125 },
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnimScore, {
+          toValue: 1.5, // Phóng to gấp 2 lần
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ]),
+      // Di chuyển tới 2/3 quãng đường còn lại, scale nhỏ dần, opacity giảm dần
+      Animated.parallel([
+        Animated.timing(positionAnim, {
+          toValue: { x: 0, y: -230 },
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnimScore, {
+          toValue: 0.9, // Thu nhỏ lại 0.5 lần
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.parallel([
+        Animated.timing(positionAnim, {
+          toValue: { x: 0, y: -230 },
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnim, {
+          toValue: 0, // Mờ dần
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ]),
+    ]).start(() => {
+      setAnimations((prevAnimations) =>
+        prevAnimations.filter((anim) => anim.id !== newAnimation.id)
+      );
+    });
+  };
 
   // Khởi tạo âm thanh "pop" chỉ 1 lần khi component được mount
   useEffect(() => {
@@ -49,7 +111,7 @@ const Speeder = () => {
     };
   }, []);
 
-  const handlePress = () => {
+  const handlePress = (e: any) => {
     // Phát âm thanh ngay lập tức khi nhấn
     if (popSoundRef.current) {
       popSoundRef.current.setCurrentTime(0); // Đặt lại âm thanh về đầu
@@ -64,6 +126,7 @@ const Speeder = () => {
       setScore(score + 1); // Tăng score
       setClick(click - 1); // Giảm click
       setLastClickTime(Date.now()); // Cập nhật thời gian nhấn
+      startAnimation();
     }
 
     Animated.sequence([
@@ -113,7 +176,7 @@ const Speeder = () => {
           setClick((prevClick) => prevClick + 1);
         }
         // Giảm score nhưng không nhỏ hơn 0
-        setScore((prevScore) => Math.max(prevScore - 1, 0));
+        // setScore((prevScore) => Math.max(prevScore - 1, 0));
       }
     }, 1000);
 
@@ -192,6 +255,21 @@ const Speeder = () => {
                 style={styles.windIg}
               />
             </View>
+            {/* Hình ảnh */}
+            {animations.map((animation, index) => (
+              <Animated.View
+                key={animation.id}
+                style={[
+                  styles.numberContainer,
+                  {
+                    transform: [...animation.positionAnim.getTranslateTransform(), { scale: animation.scaleAnimScore }],
+                    opacity: animation.opacityAnim,
+                  },
+                ]}
+              >
+                <Image source={require('../../assets/images/number/plus1.png')} style={styles.number} />
+              </Animated.View>
+            ))}
             {/* Thanh tiến trình */}
             <View style={{ width: '100%', alignItems: 'center' }}>
               <GradientBorderView borderWidth={1} style={styles.progressBar} color='#470E04' alignItems='flex-start'>
@@ -310,6 +388,19 @@ const styles = StyleSheet.create({
   windIg: {
     flex: 1,
     width: '40%',
+  },
+  numberContainer: {
+    flex: 1,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '60%',
+    pointerEvents: 'none',
+  },
+  number: {
+    width: 50,
+    height: 40,
   },
   progressBar: {
     width: '80%',
