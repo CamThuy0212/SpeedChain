@@ -51,7 +51,7 @@ const Speeder = () => {
       // Di chuyển tới 1/3 quãng đường, scale to dần
       Animated.parallel([
         Animated.timing(positionAnim, {
-          toValue: { x: 80, y: -125 },
+          toValue: { x: 80, y: -(height / 5) },
           duration: 1000,
           useNativeDriver: true,
         }),
@@ -64,7 +64,7 @@ const Speeder = () => {
       // Di chuyển tới 2/3 quãng đường còn lại, scale nhỏ dần, opacity giảm dần
       Animated.parallel([
         Animated.timing(positionAnim, {
-          toValue: { x: 0, y: -230 },
+          toValue: { x: 0, y: -(height / 3) },
           duration: 1000,
           useNativeDriver: true,
         }),
@@ -76,7 +76,7 @@ const Speeder = () => {
       ]),
       Animated.parallel([
         Animated.timing(positionAnim, {
-          toValue: { x: 0, y: -230 },
+          toValue: { x: 0, y: -(height / 3) },
           duration: 1000,
           useNativeDriver: true,
         }),
@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '60%',
+    height: '65%',
     pointerEvents: 'none',
   },
   number: {
@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     marginVertical: 20,
-    marginBottom: 100,
+    marginBottom: (height / 6) - 10,
   },
   progressFill: {
     height: '50%',
