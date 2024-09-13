@@ -14,10 +14,16 @@ import Footer from '../../components/Footer';
 import Sound from 'react-native-sound';
 import { fontFamilies } from '../../constants/fontFamilies';
 import GradientBorderView from '../../components/GradientBorderView';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../types';
+
+type SpeederScreenProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'Speeder'>;
+};
 
 const { width, height } = Dimensions.get('window');
 
-const Speeder = () => {
+const Speeder: React.FC<SpeederScreenProps> = ({ navigation }) => {
   const [level, setLevel] = useState(0);
   const [score, setScore] = useState(0);
   const [scoreLimit, setScoreLimit] = useState(1000);

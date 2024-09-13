@@ -11,10 +11,16 @@ import {
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../types';
+
+type HomeScreenProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'HomeScreen'>;
+};
 
 const { width, height } = Dimensions.get('window');
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
