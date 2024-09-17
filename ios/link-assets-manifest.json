@@ -6,6 +6,10 @@
       "sha1": "1a134a1449a38ec302cf456f1223f2523d72c55c"
     },
     {
+      "path": "assets/sounds/bgm.mp3",
+      "sha1": "faee8f27474f524b338251a761b1aeb0e7c645a7"
+    },
+    {
       "path": "assets/sounds/pop.mp3",
       "sha1": "38632e7cd1006749bae7368397472a76881ebd56"
     }
