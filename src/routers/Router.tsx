@@ -11,13 +11,14 @@ const Router = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="SplashScreen"
-      screenOptions={{ headerShown: false }}>
-      <Stack.Screen
+      initialRouteName="HomeScreen"
+      screenOptions={{ headerShown: false }}
+    >
+      {/* <Stack.Screen
         name="SplashScreen"
         component={CustomSplashScreen}
         options={{ headerShown: false }}
-      />
+      /> */}
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen
         name="Speeder"
